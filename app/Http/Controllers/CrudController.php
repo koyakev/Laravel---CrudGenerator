@@ -108,4 +108,9 @@ class CrudController extends Controller
         DB::table($table_name)->where('id', $id)->delete();
         return redirect()->route('show_table', $table_id);
     }
+
+    public function edit_from_table($table_id, $table_name, $id) {
+        $data = DB::table($table_name)->where('id', $id)->get();
+        return view('edit_data', compact('data'));
+    }
 }

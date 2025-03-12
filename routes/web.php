@@ -20,3 +20,5 @@ Route::get('/table/{table_id}', [CrudController::class, 'add_to_table'])->name('
 Route::post('/table/{table_id}/{table_name}/add', [CrudController::class, 'store_to_table'])->name('store_to_table');
 
 Route::delete('/table/{table_id}/{table_name}/{id}/delete', [CrudController::class, 'delete_from_table'])->name('delete_from_table');
+
+Route::get('/table/{table_id}/{table_name}/{id}/edit', [CrudController::claSS, 'edit_from_table'])->name('edit_from_table');

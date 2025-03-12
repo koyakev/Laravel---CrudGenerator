@@ -37,6 +37,7 @@
                                 @method('DELETE')
                                 <button>Delete</button>
                             </form>
+                            <a href="{{ route('edit_from_table', [$table_info->id, $table_info->title, $table->id]) }}">Edit</a>
                         </td>
                     </tr>
                 @endforeach
