@@ -96,11 +96,7 @@ class CrudController extends Controller
     }
 
     public function store_to_table(Request $request, $table_id, $table_name) {
-        DB::table($table_name)->insert([
-            'name' => $request->name,
-            'age' => $request->age,
-            'status' => $request->status == 1 ? 1 : 0
-        ]); 
+        DB::table($table_name)->insert($request->except('_token', '_method')); 
         return redirect()->route('show_table', $table_id);
     }
 
@@ -110,7 +106,14 @@ class CrudController extends Controller
     }
 
     public function edit_from_table($table_id, $table_name, $id) {
+        $table = Table::find($table_id);
         $data = DB::table($table_name)->where('id', $id)->get();
-        return view('edit_data', compact('data'));
+        return view('edit_data', compact(['data', 'table']));
+    }
+
+    public function update_from_table(Request $request, $table_id, $table_name, $id) {
+        $table = DB::table($table_name)->where('id', $id);
+        $table->update($request->except(['_token', '_method']));
+        return redirect()->route('show_table', $table_id);
     }
 }
